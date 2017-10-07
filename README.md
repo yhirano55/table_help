@@ -1,8 +1,8 @@
 # TableHelp
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/table_help`. To experiment with that code, run `bin/console` for an interactive prompt.
+Provide helper methods to build collection or resource tables for Rails 5.
 
-TODO: Delete this and the text above, and describe your gem
+`table_for` and `attributes_table_for` helper methods implemented in `TableHelp` are inspired by [ActiveAdmin](https://github.com/activeadmin/activeadmin).
 
 ## Installation
 
@@ -22,17 +22,56 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Collection
 
-## Development
+```html+erb
+<%= table_for @articles do |t| %>
+  <% t.column :title %>
+  <% t.column :body do |article| %>
+    <%= truncate(article.body) %>
+  <% end %>
+  <% t.column :created_at %>
+  <% t.column :updated_at %>
+  <% t.column do |article| %>
+    <ul>
+      <li><%= link_to "Show", article %></li>
+      <li><%= link_to "Edit", edit_article_path(article) %></li>
+      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+    </ul>
+  <% end %>
+<% end %>
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Resource
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```html+erb
+<%= attributes_table_for @article do |t| %>
+  <% t.row :title %>
+  <% t.row :body do |article| %>
+    <%= truncate(article.body) %>
+  <% end %>
+  <% t.row :created_at %>
+  <% t.row :updated_at %>
+  <% t.row do |article| %>
+    <ul>
+      <li><%= link_to "Edit", edit_article_path(article) %></li>
+      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+    </ul>
+  <% end %>
+<% end %>
+```
 
-## Contributing
+## Configuration
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/yhirano55/table_help.
+You can change the default options for each table.
+
+```ruby
+# config/initializers/table_help.rb
+TableHelp.config.default_options = {
+  table_for: { class: "table_for your_optional_style", border: "1" },
+  attributes_table_for: { class: "attributes_table_for your_optional_style", border: "0" },
+}
+```
 
 ## License
 
