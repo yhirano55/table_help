@@ -1,6 +1,7 @@
 # TableHelp
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Gem Version](https://badge.fury.io/rb/table_help.svg)](https://badge.fury.io/rb/table_help)
 [![Build Status](https://travis-ci.org/yhirano55/table_help.svg?branch=master)](https://travis-ci.org/yhirano55/table_help)
 
 Provide helper methods to build collection or resource tables for Rails 5.
