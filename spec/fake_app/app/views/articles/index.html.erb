@@ -1,0 +1,17 @@
+<h1>Article#index</h1>
+
+<%= table_for @articles do |t| %>
+  <% t.column :title %>
+  <% t.column :body do |article| %>
+    <%= truncate(article.body) %>
+  <% end %>
+  <% t.column :created_at %>
+  <% t.column :updated_at %>
+  <% t.column do |article| %>
+    <ul>
+      <li><%= link_to "Show", article %></li>
+      <li><%= link_to "Edit", edit_article_path(article) %></li>
+      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+    </ul>
+  <% end %>
+<% end %>

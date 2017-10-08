@@ -1,0 +1,16 @@
+<h1>Article#show</h1>
+
+<%= attributes_table_for @article do |t| %>
+  <% t.row :title %>
+  <% t.row :body do |article| %>
+    <%= truncate(article.body) %>
+  <% end %>
+  <% t.row :created_at %>
+  <% t.row :updated_at %>
+  <% t.row do |article| %>
+    <ul>
+      <li><%= link_to "Edit", edit_article_path(article) %></li>
+      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+    </ul>
+  <% end %>
+<% end %>
