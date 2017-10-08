@@ -28,7 +28,7 @@ module TableHelp
         tag.tbody do
           rows.each do |attr_name, strategy|
             concat(
-              tag.tr(class: "attributes_table-row-#{resource.model_name.singular}#{resource.to_param}") do
+              tag.tr do
                 concat tag.th(attr_name)
                 concat tag.td(Formatter.format_value(strategy.name, strategy.to_value(resource, context)), class: "col-#{strategy.name}")
               end,
