@@ -1,5 +1,8 @@
 # TableHelp
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/yhirano55/table_help.svg?branch=master)](https://travis-ci.org/yhirano55/table_help)
+
 Provide helper methods to build collection or resource tables for Rails 5.
 
 `table_for` and `attributes_table_for` helper methods implemented in `TableHelp` are inspired by [ActiveAdmin](https://github.com/activeadmin/activeadmin).
