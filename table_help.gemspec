@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 2.3.0"
 
+  s.add_dependency "railties", ">= 5.0"
+
   s.add_development_dependency "bundler", "~> 1.15"
 
   s.files      = Dir["{app,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
