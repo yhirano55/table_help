@@ -40,7 +40,7 @@ Or install it yourself as:
     <ul>
       <li><%= link_to "Show", article %></li>
       <li><%= link_to "Edit", edit_article_path(article) %></li>
-      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+      <li><%= link_to "Destroy", article, method: :delete %></li>
     </ul>
   <% end %>
 <% end %>
@@ -59,7 +59,7 @@ Or install it yourself as:
   <% t.row do |article| %>
     <ul>
       <li><%= link_to "Edit", edit_article_path(article) %></li>
-      <li><%= link_to "Destroy", edit_article_path(article), method: :delete %></li>
+      <li><%= link_to "Destroy", article, method: :delete %></li>
     </ul>
   <% end %>
 <% end %>
