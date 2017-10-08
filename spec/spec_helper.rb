@@ -1,14 +1,25 @@
-require "bundler/setup"
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+# load Rails first
+require "rails"
+
+# load the plugin
 require "table_help"
 
-RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+# needs to load the app next
+require "fake_app/application"
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
+require "capybara/rspec"
+require "capybara/rails"
+require "pry"
+
+RSpec.configure do |config|
+  config.example_status_persistence_file_path = ".rspec_status"
   config.disable_monkey_patching!
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
 end
+
+CreateArticles.migrate(:up) unless ActiveRecord::Base.connection.table_exists? "articles"
