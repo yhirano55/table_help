@@ -22,7 +22,7 @@ module TableHelp
         when DateTime, Time
           I18n.l(value)
         when Numeric
-          (name.to_sym == :id) ? value : value.to_s(:delimited)
+          name.to_s.match?(/_*id\z/) ? value : value.to_s(:delimited)
         else
           value
         end
