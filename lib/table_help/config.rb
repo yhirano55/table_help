@@ -23,6 +23,8 @@ module TableHelp
           I18n.l(value)
         when Numeric
           name.to_s.match?(/\Aid\z|_id\z/) ? value : value.to_s(:delimited)
+        when TrueClass, FalseClass
+          value.to_s
         else
           value
         end
