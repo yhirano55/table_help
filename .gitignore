@@ -10,5 +10,6 @@
 
 # rspec failure tracking
 .rspec_status
+.ruby-version
 
 /spec/fake_app/log/
