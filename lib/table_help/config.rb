@@ -14,6 +14,8 @@ module TableHelp
         case collection_or_resource
         when ActiveRecord::Relation
           collection_or_resource.model.human_attribute_name(name)
+        when Enumerable
+          collection_or_resource.first.class.human_attribute_name(name)
         else
           collection_or_resource.class.human_attribute_name(name)
         end
