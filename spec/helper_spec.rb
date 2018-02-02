@@ -25,6 +25,14 @@ RSpec.describe TableHelp::Helper do
         is_expected.to have_css "td.col-title", text: "My Awesome Title"
       end
     end
+
+    context "when passed an ActiveRecord::Relation" do
+      let(:articles) { Article.all.to_a }
+
+      it "builds an HTML table" do
+        is_expected.to have_css "td.col-title", text: "My Awesome Title"
+      end
+    end
   end
 
   describe "#attributes_table_for" do
