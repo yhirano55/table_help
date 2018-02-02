@@ -11,7 +11,8 @@ module TableHelp
 
     DEFAULT_FORMATTER = {
       attribute_name: ->(name, collection_or_resource) do
-        if collection_or_resource.respond_to?(:model)
+        case collection_or_resource
+        when ActiveRecord::Relation
           collection_or_resource.model.human_attribute_name(name)
         else
           collection_or_resource.class.human_attribute_name(name)
