@@ -15,7 +15,7 @@ module TableHelp
         when ActiveRecord::Relation
           collection_or_resource.model.human_attribute_name(name)
         when Enumerable
-          collection_or_resource.first.class.human_attribute_name(name)
+          collection_or_resource.first.class.human_attribute_name(name) unless collection_or_resource.empty?
         else
           collection_or_resource.class.human_attribute_name(name)
         end
