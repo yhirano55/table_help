@@ -26,11 +26,19 @@ RSpec.describe TableHelp::Helper do
       end
     end
 
-    context "when passed an ActiveRecord::Relation" do
+    context "when passed an Enumerable" do
       let(:articles) { Article.all.to_a }
 
       it "builds an HTML table" do
         is_expected.to have_css "td.col-title", text: "My Awesome Title"
+      end
+    end
+
+    context "when passed an empty Enumerable" do
+      let(:articles) { [] }
+
+      it "does not build an HTML table" do
+        is_expected.to be_nil
       end
     end
   end
