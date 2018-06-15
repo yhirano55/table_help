@@ -1,18 +1,21 @@
 module TableHelp
   class TableFor
-    attr_reader :collection, :context, :options, :column_names, :strategies
-    delegate :concat, :capture, :tag, to: :context
+    Column = Struct.new(:name, :human_name)
+
+    attr_reader :collection, :context, :options, :columns, :strategies, :q
+    delegate :concat, :capture, :tag, :sort_link, to: :context
 
     def initialize(collection, context, options = {})
       @collection   = collection
       @context      = context
       @options      = default_options.merge(options)
-      @column_names = []
+      @columns      = []
       @strategies   = []
+      @q            = @options.delete(:q)
     end
 
     def column(name = nil, method_name = nil, &block)
-      column_names << Formatter.format_attribute_name(name, collection)
+      columns << Column.new(name, Formatter.format_attribute_name(name, collection))
       strategies << Strategy.new(name, block_given? ? block : method_name)
     end
 
@@ -30,11 +33,19 @@ module TableHelp
       def thead
         tag.thead do
           tag.tr do
-            column_names.each do |column_name|
-              concat tag.th(column_name)
+            columns.each do |column|
+              if sortable?
+                concat tag.th(sort_link(q, column.name, column.human_name))
+              else
+                concat tag.th(column.human_name)
+              end
             end
           end
         end
+      end
+
+      def sortable?
+        !q.nil? && respond_to?(:sort_link)
       end
 
       def tbody
